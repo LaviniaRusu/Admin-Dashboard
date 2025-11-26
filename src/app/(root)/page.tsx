@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
+import { UserButton } from "@clerk/nextjs";
 
-export default function Home() {
+const SetupPage = () => {
   return (
     <div>
-      <p>Admin dashboard</p>
-      <Button>Hellonpm install @clerk/nextjs</Button>
+      <UserButton afterSignOutUrl="/" />
     </div>
   );
-}
+};
+export default SetupPage;
