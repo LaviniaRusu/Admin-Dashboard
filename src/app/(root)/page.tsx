@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
       <p>Admin dashboard</p>
-      <Button>Hello</Button>
+      <Button>Hellonpm install @clerk/nextjs</Button>
     </div>
   );
 }
