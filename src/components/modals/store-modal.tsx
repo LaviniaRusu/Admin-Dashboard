@@ -144,7 +144,8 @@ export const StoreModal = () => {
       setLoading(true);
 
       const response = await axios.post("/api/stores", values);
-      toast.success("Magazin creat!");
+      // toast.success("Magazin creat!");
+      window.location.assign(`/${response.data.id}`);
     } catch (error) {
       toast.error("Ceva nu a mers bine!");
     } finally {
