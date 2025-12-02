@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     const { userId } = await auth();
+    // const userId = "1";
     const body = await req.json();
     const { name } = body;
 
