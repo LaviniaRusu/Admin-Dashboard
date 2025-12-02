@@ -1,14 +1,15 @@
 import React from "react";
-import prismadb from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
-interface DashboardPageProps {
-  params: { storeId: string };
-}
-
-const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
-  const store = await prismadb.store.findFirst({
+const DashboardPage = async ({
+  params,
+}: {
+  params: Promise<{ storeId: string }>;
+}) => {
+  const { storeId } = await params;
+  const store = await prisma.store.findFirst({
     where: {
-      id: params.storeId,
+      id: storeId,
     },
   });
 
