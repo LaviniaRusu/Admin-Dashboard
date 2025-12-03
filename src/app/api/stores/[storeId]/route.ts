@@ -47,22 +47,23 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { storeId: string } }
+  { params }: { params: Promise<{ storeId: string }> }
 ) {
   try {
+    const param = await params;
     const { userId } = await auth();
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 401 });
     }
 
-    if (!params.storeId) {
+    if (!param.storeId) {
       return new NextResponse("Store id is required", { status: 400 });
     }
 
     const store = await prisma.store.deleteMany({
       where: {
-        id: params.storeId,
+        id: param.storeId,
         userId,
       },
     });
