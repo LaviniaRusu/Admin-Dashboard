@@ -58,7 +58,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         ))}
       </div>
 
-      <CldUploadWidget onSuccess={onUpload} uploadPreset="bdbdbd">
+      <CldUploadWidget
+        onSuccess={onUpload}
+        // signatureEndpoint="/api/sign-image"
+        uploadPreset="bdbdbd"
+      >
         {({ open }) => {
           const onClick = () => {
             open();
