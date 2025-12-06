@@ -52,16 +52,17 @@ export async function POST(
 }
 export async function GET(
   req: Request,
-  { params }: { params: { storeId: string } }
+  { params }: { params: Promise<{ params: { storeId: string } }> }
 ) {
   try {
-    if (!params.storeId) {
+    const { storeId } = await params;
+    if (!storeId) {
       return new NextResponse("Store Id is requiered", { status: 400 });
     }
 
     const billboards = await prisma.billboard.findMany({
       where: {
-        storeId: params.storeId,
+        storeId: storeId,
       },
     });
     return NextResponse.json(billboards);

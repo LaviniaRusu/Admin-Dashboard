@@ -1,3 +1,79 @@
+// import { auth } from "@clerk/nextjs/server";
+// import { NextResponse } from "next/server";
+// import prisma from "@/lib/prisma";
+
+// export async function PATCH(
+//   req: Request,
+//   { params }: { params: Promise<{ storeId: string }> }
+// ) {
+//   try {
+//     const param = await params;
+
+//     const { userId } = await auth();
+//     console.log(userId);
+
+//     const body = await req.json();
+
+//     const { name } = body;
+
+//     if (!userId) {
+//       return new NextResponse("Unauthenticated", { status: 401 });
+//     }
+
+//     if (!name) {
+//       return new NextResponse("Name is required", { status: 400 });
+//     }
+
+//     if (!param.storeId) {
+//       return new NextResponse("Store id is required", { status: 400 });
+//     }
+
+//     const store = await prisma.store.updateMany({
+//       where: {
+//         id: param.storeId,
+//         userId,
+//       },
+//       data: {
+//         name,
+//       },
+//     });
+
+//     return NextResponse.json(store);
+//   } catch (error) {
+//     console.log("[STORE_PATCH]", error);
+//     return new NextResponse("Internal error", { status: 500 });
+//   }
+// }
+
+// export async function DELETE(
+//   req: Request,
+//   { params }: { params: Promise<{ storeId: string }> }
+// ) {
+//   try {
+//     const param = await params;
+//     const { userId } = await auth();
+
+//     if (!userId) {
+//       return new NextResponse("Unauthenticated", { status: 401 });
+//     }
+
+//     if (!param.storeId) {
+//       return new NextResponse("Store id is required", { status: 400 });
+//     }
+
+//     const store = await prisma.store.deleteMany({
+//       where: {
+//         id: param.storeId,
+//         userId,
+//       },
+//     });
+
+//     return NextResponse.json(store);
+//   } catch (error) {
+//     console.log("[STORE_DELETE]", error);
+//     return new NextResponse("Internal error", { status: 500 });
+//   }
+// }
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
@@ -7,7 +83,7 @@ export async function PATCH(
   { params }: { params: Promise<{ storeId: string }> }
 ) {
   try {
-    const param = await params;
+    const { storeId } = await params;
 
     const { userId } = await auth();
     console.log(userId);
@@ -24,13 +100,13 @@ export async function PATCH(
       return new NextResponse("Name is required", { status: 400 });
     }
 
-    if (!param.storeId) {
+    if (!storeId) {
       return new NextResponse("Store id is required", { status: 400 });
     }
 
     const store = await prisma.store.updateMany({
       where: {
-        id: param.storeId,
+        id: storeId,
         userId,
       },
       data: {
@@ -50,20 +126,20 @@ export async function DELETE(
   { params }: { params: Promise<{ storeId: string }> }
 ) {
   try {
-    const param = await params;
+    const { storeId } = await params;
     const { userId } = await auth();
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 401 });
     }
 
-    if (!param.storeId) {
+    if (!storeId) {
       return new NextResponse("Store id is required", { status: 400 });
     }
 
     const store = await prisma.store.deleteMany({
       where: {
-        id: param.storeId,
+        id: storeId,
         userId,
       },
     });
