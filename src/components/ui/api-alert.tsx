@@ -14,7 +14,7 @@
 
 // const variantMap: Record<
 //   ApiAlertProps["variant"],
-//   "secondary" | "destructive"
+//   "secondary" | "destr uctive"
 // > = {
 //   public: "secondary",
 //   admin: "destructive",
