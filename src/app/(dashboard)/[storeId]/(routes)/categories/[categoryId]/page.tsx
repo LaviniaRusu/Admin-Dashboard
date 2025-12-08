@@ -50,28 +50,32 @@
 // export default BillboardPage;
 //////////////////////
 
-import prismadb from "@/lib/prisma";
-import { BillboardForm } from "./components/billboard-form";
+import prisma from "@/lib/prisma";
+import { CategoryForm } from "./components/category-form";
 import ImageUpload from "@/components/ui/image-upload";
 
-const BillboardPage = async ({
+const CategoryPage = async ({
   params,
 }: {
-  params: Promise<{ billboardId: string }>;
+  params: Promise<{ categoryId: string; storeId: string }>;
 }) => {
-  const { billboardId } = await params;
-  const billboard = await prismadb.billboard.findUnique({
+  const { categoryId, storeId } = await params;
+  const category = await prisma.category.findUnique({
     where: {
-      id: billboardId,
+      id: categoryId,
+    },
+  });
+  const billboards = await prisma.billboard.findMany({
+    where: {
+      storeId: storeId,
     },
   });
 
   return (
     <div>
-      <BillboardForm initialData={billboard} />
-      {/* <ImageUpload /> */}
+      <CategoryForm billboards={billboards} initialData={category} />
     </div>
   );
 };
 
-export default BillboardPage;
+export default CategoryPage;
