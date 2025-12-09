@@ -4,33 +4,33 @@
 
 // export async function GET(
 //   req: Request,
-//   { params }: { params: Promise<{ colorId: string }> }
+//   { params }: { params: Promise<{ sizeId: string }> }
 // ) {
 //   try {
-//     const { colorId } = await params;
-//     if (!colorId) {
-//       return new NextResponse("Color id is required", { status: 400 });
+//     const { sizeId } = await params;
+//     if (!sizeId) {
+//       return new NextResponse("Size id is required", { status: 400 });
 //     }
 
-//     const color = await prisma.color.findUnique({
+//     const size = await prisma.size.findUnique({
 //       where: {
-//         id: colorId,
+//         id: sizeId,
 //       },
 //     });
 
-//     return NextResponse.json(color);
+//     return NextResponse.json(size);
 //   } catch (error) {
-//     console.log("[COLOR_GET]", error);
+//     console.log("[SIZE_GET]", error);
 //     return new NextResponse("Internal error", { status: 500 });
 //   }
 // }
 
 // export async function PATCH(
 //   req: Request,
-//   { params }: { params: Promise<{ storeId: string; colorId: string }> }
+//   { params }: { params: Promise<{ storeId: string; sizeId: string }> }
 // ) {
 //   try {
-//     const { storeId, colorId } = await params;
+//     const { storeId, sizeId } = await params;
 
 //     const { userId } = await auth();
 //     console.log(userId);
@@ -50,8 +50,8 @@
 //       return new NextResponse("Value is required", { status: 400 });
 //     }
 
-//     if (!colorId) {
-//       return new NextResponse("color id is required", { status: 400 });
+//     if (!sizeId) {
+//       return new NextResponse("Size id is required", { status: 400 });
 //     }
 
 //     const storeByUserId = await prisma.store.findFirst({
@@ -65,9 +65,9 @@
 //       return new NextResponse("Unauthorized", { status: 403 });
 //     }
 
-//     const color = await prisma.color.updateMany({
+//     const size = await prisma.size.updateMany({
 //       where: {
-//         id: colorId,
+//         id: sizeId,
 //       },
 //       data: {
 //         name,
@@ -75,19 +75,19 @@
 //       },
 //     });
 
-//     return NextResponse.json(color);
+//     return NextResponse.json(size);
 //   } catch (error) {
-//     console.log("COLOR_PATCH]", error);
+//     console.log("SIZE_PATCH]", error);
 //     return new NextResponse("Internal error", { status: 500 });
 //   }
 // }
 
 // export async function DELETE(
 //   req: Request,
-//   { params }: { params: Promise<{ storeId: string; colorId: string }> }
+//   { params }: { params: Promise<{ storeId: string; sizeId: string }> }
 // ) {
 //   try {
-//     const { storeId, colorId } = await params;
+//     const { storeId, sizeId } = await params;
 //     const { userId } = await auth();
 //     console.log("USER:", userId, "STORE:", storeId);
 
@@ -95,8 +95,8 @@
 //       return new NextResponse("Unauthenticated", { status: 401 });
 //     }
 
-//     if (!colorId) {
-//       return new NextResponse("color id is required", { status: 400 });
+//     if (!sizeId) {
+//       return new NextResponse("Size id is required", { status: 400 });
 //     }
 
 //     const storeByUserId = await prisma.store.findFirst({
@@ -110,15 +110,15 @@
 //       return new NextResponse("Unauthorized", { status: 403 });
 //     }
 
-//     const color = await prisma.color.deleteMany({
+//     const size = await prisma.size.deleteMany({
 //       where: {
-//         id: colorId,
+//         id: sizeId,
 //       },
 //     });
 
-//     return NextResponse.json(color);
+//     return NextResponse.json(size);
 //   } catch (error) {
-//     console.log("[COLOR_DELETE]", error);
+//     console.log("[SIZE_DELETE]", error);
 //     return new NextResponse("Internal error", { status: 500 });
 //   }
 // }
@@ -128,33 +128,33 @@ import prisma from "@/lib/prisma";
 
 export async function GET(
   req: Request,
-  { params }: { params: Promise<{ sizeId: string }> }
+  { params }: { params: Promise<{ colorId: string }> }
 ) {
   try {
-    const { sizeId } = await params;
-    if (!sizeId) {
-      return new NextResponse("Size id is required", { status: 400 });
+    const { colorId } = await params;
+    if (!colorId) {
+      return new NextResponse("Color id is required", { status: 400 });
     }
 
-    const size = await prisma.size.findUnique({
+    const color = await prisma.color.findUnique({
       where: {
-        id: sizeId,
+        id: colorId,
       },
     });
 
-    return NextResponse.json(size);
+    return NextResponse.json(color);
   } catch (error) {
-    console.log("[SIZE_GET]", error);
+    console.log("[COLOR_GET]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
 
 export async function PATCH(
   req: Request,
-  { params }: { params: Promise<{ storeId: string; sizeId: string }> }
+  { params }: { params: Promise<{ storeId: string; colorId: string }> }
 ) {
   try {
-    const { storeId, sizeId } = await params;
+    const { storeId, colorId } = await params;
 
     const { userId } = await auth();
     console.log(userId);
@@ -174,8 +174,8 @@ export async function PATCH(
       return new NextResponse("Value is required", { status: 400 });
     }
 
-    if (!sizeId) {
-      return new NextResponse("Size id is required", { status: 400 });
+    if (!colorId) {
+      return new NextResponse("color id is required", { status: 400 });
     }
 
     const storeByUserId = await prisma.store.findFirst({
@@ -189,9 +189,9 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    const size = await prisma.size.updateMany({
+    const color = await prisma.color.updateMany({
       where: {
-        id: sizeId,
+        id: colorId,
       },
       data: {
         name,
@@ -199,19 +199,19 @@ export async function PATCH(
       },
     });
 
-    return NextResponse.json(size);
+    return NextResponse.json(color);
   } catch (error) {
-    console.log("SIZE_PATCH]", error);
+    console.log("COLOR_PATCH]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
 
 export async function DELETE(
   req: Request,
-  { params }: { params: Promise<{ storeId: string; sizeId: string }> }
+  { params }: { params: Promise<{ storeId: string; colorId: string }> }
 ) {
   try {
-    const { storeId, sizeId } = await params;
+    const { storeId, colorId } = await params;
     const { userId } = await auth();
     console.log("USER:", userId, "STORE:", storeId);
 
@@ -219,8 +219,8 @@ export async function DELETE(
       return new NextResponse("Unauthenticated", { status: 401 });
     }
 
-    if (!sizeId) {
-      return new NextResponse("Size id is required", { status: 400 });
+    if (!colorId) {
+      return new NextResponse("color id is required", { status: 400 });
     }
 
     const storeByUserId = await prisma.store.findFirst({
@@ -234,15 +234,15 @@ export async function DELETE(
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    const size = await prisma.size.deleteMany({
+    const color = await prisma.color.deleteMany({
       where: {
-        id: sizeId,
+        id: colorId,
       },
     });
 
-    return NextResponse.json(size);
+    return NextResponse.json(color);
   } catch (error) {
-    console.log("[SIZE_DELETE]", error);
+    console.log("[COLOR_DELETE]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
