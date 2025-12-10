@@ -1,9 +1,8 @@
 import prisma from "@/lib/prisma";
 import { format } from "date-fns";
-import { BillboardClient, ProductClient } from "./components/client";
+import { ProductClient } from "./components/client";
 import { ProductColumn } from "./components/columns";
 import { formatter } from "@/lib/utils";
-import { size } from "zod";
 
 const ProductsPage = async ({
   params,
