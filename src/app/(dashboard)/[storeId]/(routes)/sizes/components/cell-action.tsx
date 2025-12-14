@@ -80,3 +80,5 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     </>
   );
 };
+
+export default CellAction;

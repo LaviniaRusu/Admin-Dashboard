@@ -33,9 +33,4 @@ export const columns: ColumnDef<OrederColumn>[] = [
     accessorKey: "isPaid",
     header: "Paid",
   },
-
-  {
-    id: "actions",
-    cell: ({ row }) => <CellAction data={row.original} />,
-  },
 ];
