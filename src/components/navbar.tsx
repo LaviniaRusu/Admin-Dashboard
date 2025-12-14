@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 import prisma from "@/lib/prisma";
 import { auth, currentUser } from "@clerk/nextjs/server";
+import { ThemeToggle } from "./theme-toggle";
 
 const Navbar = async () => {
   const user = await currentUser();
@@ -31,6 +32,7 @@ const Navbar = async () => {
         <MainNav />
 
         <div className="ml-auto flex items-center space-x-4">
+          <ThemeToggle />
           <UserButton afterSignOutUrl="/" />
         </div>
       </div>
