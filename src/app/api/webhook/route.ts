@@ -1,19 +1,174 @@
+// import Stripe from "stripe";
+// import { headers } from "next/headers";
+// import { NextResponse } from "next/server";
+
+// import { stripe } from "@/lib/stripe";
+// import prisma from "@/lib/prisma";
+
+// export async function POST(req: Request) {
+//   const body = await req.text();
+//   const signature = headers().get("Stripe-Signature") as string;
+
+//   let event: Stripe.Event;
+
+//   try {
+//     event = stripe.webhooks.constructEvent(
+//       body,
+//       signature,
+//       process.env.STRIPE_WEBHOOK_SECRET!
+//     );
+//   } catch (error) {
+//     return new NextResponse("Webhook error", { status: 400 });
+//   }
+// }
+///cod exact ca si in video
+// import Stripe from "stripe";
+// import { headers } from "next/headers";
+// import { NextResponse } from "next/server";
+
+// import { stripe } from "@/lib/stripe";
+// import prisma from "@/lib/prisma";
+
+// export async function POST(req: Request) {
+//   const body = await req.text();
+//   const signature = headers().get("Stripe-Signature") as string;
+
+//   let event: Stripe.Event;
+
+//   try {
+//     event = stripe.webhooks.constructEvent(
+//       body,
+//       signature,
+//       process.env.STRIPE_WEBHOOK_SECRET!
+//     );
+//   } catch (error: any) {
+//     return new NextResponse(`Webhook Error: ${error.message}`, { status: 400 });
+//   }
+
+//   const session = event.data.object as Stripe.Checkout.Session;
+//   const address = session?.customer_details?.address;
+
+//   const addressComponents = [
+//     address?.line1,
+//     address?.line2,
+//     address?.city,
+//     address?.state,
+//     address?.postal_code,
+//     address?.country,
+//   ];
+
+//   const addressString = addressComponents.filter((c) => c !== null).join(", ");
+
+//   if (event.type === "checkout.session.completed") {
+//     const order = await prisma.order.update({
+//       where: {
+//         id: session?.metadata?.orderId,
+//       },
+//       data: {
+//         isPaid: true,
+//         address: addressString,
+//         phone: session?.customer_details?.phone || "",
+//       },
+//       include: {
+//         orderItems: true,
+//       },
+//     });
+
+//     const productIds = order.orderItems.map((orderItem) => orderItem.productId);
+
+//     await prisma.product.updateMany({
+//       where: {
+//         id: {
+//           in: [...productIds],
+//         },
+//       },
+//       data: {
+//         isArchived: true,
+//       },
+//     });
+//   }
+
+//   return new NextResponse(null, { status: 200 });
+// }
 import Stripe from "stripe";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 import { stripe } from "@/lib/stripe";
-import prismaDb from "@/lib/prismadb";
+import prisma from "@/lib/prisma";
 
 export async function POST(req: Request) {
   const body = await req.text();
-  const signature = headers().get("Stripe-Signature") as string;
+
+  const headersList = await headers();
+  const signature = headersList.get("Stripe-Signature");
+
+  if (!signature) {
+    return new NextResponse("Missing Stripe signature", { status: 400 });
+  }
 
   let event: Stripe.Event;
 
   try {
-    event = stripe.webhooks.constructEvent(body, signature);
-  } catch (err) {
-    return new NextResponse("Webhook error", { status: 400 });
+    event = stripe.webhooks.constructEvent(
+      body,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET!
+    );
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return new NextResponse(`Webhook Error: ${error.message}`, {
+        status: 400,
+      });
+    }
+
+    return new NextResponse("Webhook Error", { status: 400 });
   }
+
+  const session = event.data.object as Stripe.Checkout.Session;
+  const address = session.customer_details?.address;
+
+  const addressComponents = [
+    address?.line1,
+    address?.line2,
+    address?.city,
+    address?.state,
+    address?.postal_code,
+    address?.country,
+  ];
+
+  const addressString = addressComponents
+    .filter((c): c is string => Boolean(c))
+    .join(", ");
+
+  if (event.type === "checkout.session.completed") {
+    const order = await prisma.order.update({
+      where: {
+        id: session.metadata?.orderId,
+      },
+      data: {
+        isPaid: true,
+        address: addressString,
+        phone: session.customer_details?.phone || "",
+      },
+      include: {
+        orderItems: true,
+      },
+    });
+
+    const productIds = order.orderItems.map((orderItem) => orderItem.productId);
+
+    await prisma.product.updateMany({
+      where: {
+        id: {
+          in: productIds,
+        },
+      },
+      data: {
+        isArchived: true,
+      },
+    });
+  }
+
+  return new NextResponse(null, { status: 200 });
 }
