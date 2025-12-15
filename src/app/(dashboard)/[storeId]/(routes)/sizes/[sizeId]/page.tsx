@@ -50,9 +50,37 @@
 // export default BillboardPage;
 //////////////////////
 
+// import prisma from "@/lib/prisma";
+// import { SizeForm } from "./components/size-form";
+// import ImageUpload from "@/components/ui/image-upload";
+// // PharmaForma- in loc de size
+
+// const SizePage = async ({
+//   params,
+// }: {
+//   params: Promise<{ sizeId: string }>;
+// }) => {
+//   const { sizeId } = await params;
+//   const size = await prisma.size.findUnique({
+//     where: {
+//       id: sizeId,
+//     },
+//   });
+
+//   return (
+//     <div>
+//       <SizeForm initialData={size} />
+//       {/* <ImageUpload /> */}
+//     </div>
+//   );
+// };
+
+// export default SizePage;
+
 import prisma from "@/lib/prisma";
 import { SizeForm } from "./components/size-form";
 import ImageUpload from "@/components/ui/image-upload";
+// PharmaForm- in loc de size
 
 const SizePage = async ({
   params,

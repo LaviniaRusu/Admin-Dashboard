@@ -32,10 +32,10 @@ export function MainNav({
 }: React.HTMLAttributes<HTMLElement>) {
   const pathname = usePathname();
   const params = useParams();
-
+  //C:\Users\asus\farmacie\app\(pages)\(routes)\product-categories\page.tsx
   const routes = [
     {
-      href: `/${params.storeId}`,
+      href: `/home`,
       label: "Home",
       active: pathname === `/${params.storeId}`,
     },
@@ -53,6 +53,11 @@ export function MainNav({
       href: `/${params.storeId}/sizes`,
       label: "Sizes",
       active: pathname === `/${params.storeId}/sizes`,
+    },
+    {
+      href: `/${params.storeId}/pharmaceutical-form`,
+      label: "pharmaceutical-form",
+      active: pathname === `/${params.storeId}/pharmaceutical-form`,
     },
     {
       href: `/${params.storeId}/colors`,

@@ -27,6 +27,7 @@ import {
   Category,
   Color,
   Image,
+  PharmaceuticalForm,
   Product,
   Size,
 } from "@/generated/prisma/client";
@@ -52,6 +53,7 @@ interface ProductFormProps {
   categories: Category[];
   colors: Color[];
   sizes: Size[];
+  pharmceuticalform: PharmaceuticalForm[];
 }
 const formSchema = z.object({
   name: z.string().min(1),
