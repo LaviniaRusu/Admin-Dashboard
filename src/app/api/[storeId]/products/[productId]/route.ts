@@ -20,6 +20,7 @@ export async function GET(
         images: true,
         category: true,
         size: true,
+        pharmaceuticalForm: true,
         color: true,
       },
     });
@@ -49,6 +50,7 @@ export async function PATCH(
       categoryId,
       colorId,
       sizeId,
+      pharmaceuticalFormId,
       images,
       isFeatured,
       isArchived,
@@ -73,6 +75,12 @@ export async function PATCH(
     if (!sizeId) {
       return new NextResponse("Size Id is requiered", { status: 400 });
     }
+    if (!pharmaceuticalFormId) {
+      return new NextResponse("Pharmaceutical Form Id is requiered", {
+        status: 400,
+      });
+    }
+
     if (!colorId) {
       return new NextResponse("Color Id  is requiered", { status: 400 });
     }
@@ -102,6 +110,7 @@ export async function PATCH(
         categoryId,
         colorId,
         sizeId,
+        pharmaceuticalFormId,
         images: {
           deleteMany: {},
         },

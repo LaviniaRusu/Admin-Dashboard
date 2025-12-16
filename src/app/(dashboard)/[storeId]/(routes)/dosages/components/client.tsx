@@ -7,17 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 
-import { columns, PharmaceuticalFormColumn } from "./columns";
+import { DosageColumn, columns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 import { ApiList } from "@/components/ui/api-list";
 
-interface PharmaceuticalFormClientProps {
-  data: PharmaceuticalFormColumn[];
+interface DosagesClientProps {
+  data: DosageColumn[];
 }
 
-export const PharmaceuticalFormClient: React.FC<
-  PharmaceuticalFormClientProps
-> = ({ data }) => {
+export const DosagesClient: React.FC<DosagesClientProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
 
@@ -25,17 +23,13 @@ export const PharmaceuticalFormClient: React.FC<
     <>
       <div className="flex items-center justify-between">
         <Heading
-          title={`Forme farmaceutice (${data.length})`}
-          description="Gestionează formele farmaceutice ale magazinului"
+          title={`Dosages (${data.length})`}
+          description="Manage dosages for your store"
         />
 
-        <Button
-          onClick={() =>
-            router.push(`/${params.storeId}/pharmaceutical-form/new`)
-          }
-        >
+        <Button onClick={() => router.push(`/${params.storeId}/dosages/new`)}>
           <Plus className="mr-2 h-4 w-4" />
-          Add new
+          Add New
         </Button>
       </div>
 
@@ -43,17 +37,10 @@ export const PharmaceuticalFormClient: React.FC<
 
       <DataTable searchKey="name" columns={columns} data={data} />
 
-      <Heading
-        title="API"
-        description="Endpoint-uri API pentru forme farmaceutice"
-      />
-
+      <Heading title="API" description="API calls for Dosages" />
       <Separator />
 
-      <ApiList
-        entityName="pharmaceutical-form"
-        entityIdName="pharmaceuticalFormId"
-      />
+      <ApiList entityName="dosages" entityIdName="dosageId" />
     </>
   );
 };

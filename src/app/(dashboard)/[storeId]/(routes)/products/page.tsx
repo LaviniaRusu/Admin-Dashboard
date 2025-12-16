@@ -18,6 +18,7 @@ const ProductsPage = async ({
       category: true,
       size: true,
       color: true,
+      pharmaceuticalForm: true,
     },
 
     orderBy: {

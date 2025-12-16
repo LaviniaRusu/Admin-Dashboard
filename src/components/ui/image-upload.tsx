@@ -8,7 +8,7 @@ import Image from "next/image";
 import { CldUploadWidget } from "next-cloudinary";
 interface ImageUploadProps {
   disabled: boolean;
-  onChange: (value: string) => void;
+  onChange: (value: string[]) => void;
   onRemove: (value: string) => void;
   value: string[];
 }

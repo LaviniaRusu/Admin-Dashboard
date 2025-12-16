@@ -77,15 +77,15 @@ export const PharmaceuticalFormForm: React.FC<PharmaceuticalFormProps> = ({
 
       if (initialData) {
         await axios.patch(
-          `/api/${storeId}/pharmaceutical-forms/${formId}`,
+          `/api/${storeId}/pharmaceutical-form/${formId}`,
           data
         );
       } else {
-        await axios.post(`/api/${storeId}/pharmaceutical-forms`, data);
+        await axios.post(`/api/${storeId}/pharmaceutical-form`, data);
       }
 
       router.refresh();
-      router.push(`/${storeId}/pharmaceutical-forms`);
+      router.push(`/${storeId}/pharmaceutical-form`);
       toast.success(toastMessage);
     } catch {
       toast.error("A apărut o eroare.");
@@ -103,10 +103,10 @@ export const PharmaceuticalFormForm: React.FC<PharmaceuticalFormProps> = ({
         formId: string;
       };
 
-      await axios.delete(`/api/${storeId}/pharmaceutical-forms/${formId}`);
+      await axios.delete(`/api/${storeId}/pharmaceutical-form/${formId}`);
 
       router.refresh();
-      router.push(`/${storeId}/pharmaceutical-forms`);
+      router.push(`/${storeId}/pharmaceutical-form`);
       toast.success("Forma farmaceutică a fost ștearsă.");
     } catch {
       toast.error("Există produse asociate cu această formă.");

@@ -56,7 +56,7 @@ export function MainNav({
     },
     {
       href: `/${params.storeId}/pharmaceutical-form`,
-      label: "pharmaceutical-form",
+      label: "Pharmaceutical-form",
       active: pathname === `/${params.storeId}/pharmaceutical-form`,
     },
     {
