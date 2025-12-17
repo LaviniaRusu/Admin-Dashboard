@@ -25,7 +25,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import {
   Category,
-  Color,
   Dosage,
   Image,
   PharmaceuticalForm,
@@ -52,7 +51,7 @@ interface ProductFormProps {
       })
     | null;
   categories: Category[];
-  colors: Color[];
+
   dosages: Dosage[];
   sizes: Size[];
   pharmceuticalform: PharmaceuticalForm[];
@@ -62,7 +61,7 @@ const formSchema = z.object({
   images: z.object({ url: z.string() }).array(),
   price: z.coerce.number().min(1),
   categoryId: z.string().min(1),
-  colorId: z.string().min(1),
+
   dosageId: z.string().min(1),
   sizeId: z.string().min(1),
   pharmaceuticalFormId: z.string().min(1),
@@ -73,7 +72,7 @@ type ProductFormValues = z.infer<typeof formSchema>;
 export const ProductForm: React.FC<ProductFormProps> = ({
   initialData,
   categories,
-  colors,
+
   dosages,
   sizes,
   pharmceuticalform,
@@ -100,7 +99,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           images: [],
           price: 0,
           categoryId: "",
-          colorId: "",
+
           dosageId: "",
           sizeId: "",
           pharmaceuticalFormId: "",
@@ -341,40 +340,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="colorId"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Color</FormLabel>
-                  <Select
-                    disabled={loading}
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          defaultValue={field.value}
-                          placeholder="Select a color"
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-
-                    <SelectContent>
-                      {colors.map((color) => (
-                        <SelectItem key={color.id} value={color.id}>
-                          {color.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="dosageId"

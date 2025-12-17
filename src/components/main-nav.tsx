@@ -59,11 +59,7 @@ export function MainNav({
       label: "Pharmaceutical-form",
       active: pathname === `/${params.storeId}/pharmaceutical-form`,
     },
-    {
-      href: `/${params.storeId}/colors`,
-      label: "Colors",
-      active: pathname === `/${params.storeId}/colors`,
-    },
+
     {
       href: `/${params.storeId}/dosages`,
       label: "Dosages",
@@ -73,6 +69,11 @@ export function MainNav({
       href: `/${params.storeId}/products`,
       label: "Products",
       active: pathname === `/${params.storeId}/products`,
+    },
+    {
+      href: `/${params.storeId}/descriptions`,
+      label: "Description",
+      active: pathname === `/${params.storeId}/descriptions`,
     },
     {
       href: `/${params.storeId}/orders`,

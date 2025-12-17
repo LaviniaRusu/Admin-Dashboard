@@ -34,11 +34,6 @@ const ProductPage = async ({
     },
   });
 
-  const colors = await prisma.color.findMany({
-    where: {
-      storeId: storeId,
-    },
-  });
   const dosages = await prisma.dosage.findMany({
     where: {
       storeId: storeId,
@@ -49,7 +44,6 @@ const ProductPage = async ({
     <div>
       <ProductForm
         categories={categories}
-        colors={colors}
         sizes={sizes}
         dosages={dosages}
         initialData={product}

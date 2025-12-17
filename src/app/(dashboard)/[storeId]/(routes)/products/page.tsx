@@ -17,7 +17,7 @@ const ProductsPage = async ({
     include: {
       category: true,
       size: true,
-      color: true,
+
       dosage: true,
       pharmaceuticalForm: true,
     },
@@ -34,7 +34,7 @@ const ProductsPage = async ({
     price: formatter.format(item.price.toNumber()),
     category: item.category.name,
     size: item.size.name,
-    color: item.color.name,
+
     dosage: item.dosage.name,
     pharmaceuticalForm: item.pharmaceuticalForm.name,
 

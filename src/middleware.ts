@@ -2,7 +2,7 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 //  DOAR rutele de admin sunt protejate
 const isProtectedRoute = createRouteMatcher([
-  "/api/:storeId/(billboards|categories|products|sizes|pharmaceutical-form|colors)", // POST etc
+  "/api/:storeId/(billboards|categories|products|sizes|pharmaceutical-form)", // POST etc
   "/(.*)/settings",
 ]);
 

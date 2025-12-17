@@ -15,7 +15,7 @@ export async function POST(
       name,
       price,
       categoryId,
-      colorId,
+
       dosageId,
       sizeId,
       pharmaceuticalFormId,
@@ -49,9 +49,7 @@ export async function POST(
         status: 400,
       });
     }
-    if (!colorId) {
-      return new NextResponse("Color Id  is requiered", { status: 400 });
-    }
+
     if (!dosageId) {
       return new NextResponse(" Dosage Id  is requiered", { status: 400 });
     }
@@ -76,7 +74,7 @@ export async function POST(
         isFeatured,
         isArchived,
         categoryId,
-        colorId,
+
         dosageId,
         sizeId,
         pharmaceuticalFormId,
@@ -103,11 +101,11 @@ export async function GET(
     const { searchParams } = new URL(req.url);
 
     const categoryId = searchParams.get("categoryId") || undefined;
-    const colorId = searchParams.get("colorId") || undefined;
+
     const dosageId = searchParams.get("dosageId") || undefined;
     const sizeId = searchParams.get("sizeId") || undefined;
     const pharmaceuticalFormId =
-      searchParams.get("   pharmaceuticalFormId") || undefined;
+      searchParams.get("pharmaceuticalFormId") || undefined;
     const isFeatured = searchParams.get("isFeatured");
 
     const { storeId } = await params;
@@ -119,7 +117,7 @@ export async function GET(
       where: {
         storeId: storeId,
         categoryId,
-        colorId,
+
         dosageId,
         sizeId,
         pharmaceuticalFormId,
@@ -129,7 +127,7 @@ export async function GET(
       include: {
         images: true,
         category: true,
-        color: true,
+
         dosage: true,
         size: true,
         pharmaceuticalForm: true,

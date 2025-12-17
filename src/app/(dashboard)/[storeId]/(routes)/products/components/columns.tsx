@@ -9,7 +9,7 @@ export type ProductColumn = {
   price: string;
   size: string;
   category: string;
-  color: string;
+
   dosage: string;
   isFeatured: boolean;
   isArchived: boolean;
@@ -46,19 +46,7 @@ export const columns: ColumnDef<ProductsColumn>[] = [
     accessorKey: "pharmaceuticalForm",
     header: "PharmaceuticalForm",
   },
-  {
-    accessorKey: "color",
-    header: "Color",
-    cell: ({ row }) => (
-      <div className="flex items-center gap-x-2">
-        {row.original.color}
-        <div
-          className="h-6 w-6 rounded-full border"
-          style={{ backgroundColor: row.original.color }}
-        />
-      </div>
-    ),
-  },
+
   {
     accessorKey: "dosage",
     header: "Dosage",
