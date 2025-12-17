@@ -22,6 +22,7 @@ export async function GET(
         size: true,
         pharmaceuticalForm: true,
         color: true,
+        dosage: true,
       },
     });
 
@@ -49,6 +50,7 @@ export async function PATCH(
       price,
       categoryId,
       colorId,
+      dosageId,
       sizeId,
       pharmaceuticalFormId,
       images,
@@ -84,6 +86,9 @@ export async function PATCH(
     if (!colorId) {
       return new NextResponse("Color Id  is requiered", { status: 400 });
     }
+    if (!dosageId) {
+      return new NextResponse("Dosage Id  is requiered", { status: 400 });
+    }
 
     if (!productId) {
       return new NextResponse("Product id is required", { status: 400 });
@@ -109,6 +114,7 @@ export async function PATCH(
         price,
         categoryId,
         colorId,
+        dosageId,
         sizeId,
         pharmaceuticalFormId,
         images: {

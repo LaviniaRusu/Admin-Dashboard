@@ -39,6 +39,11 @@ const ProductPage = async ({
       storeId: storeId,
     },
   });
+  const dosages = await prisma.dosage.findMany({
+    where: {
+      storeId: storeId,
+    },
+  });
 
   return (
     <div>
@@ -46,6 +51,7 @@ const ProductPage = async ({
         categories={categories}
         colors={colors}
         sizes={sizes}
+        dosages={dosages}
         initialData={product}
         pharmceuticalform={pharmaceuticalForms}
       />

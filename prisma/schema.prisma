@@ -25,8 +25,9 @@ model Store {
   colors     Color[]     @relation("StoreToColor")
   products   Product[]   @relation("StoreToProduct")
   order      Order[]     @relation("StoreToOrder")
-  // store      Store?      @relation(fields: [storeId], references: [id])
-  storeId    String?
+  dosages    Dosage[]    @relation("StoreToDosage")
+
+  storeId String?
 
   pharmaceuticalForms PharmaceuticalForm[] @relation("StoreToPharmaceuticalForm")
 }
@@ -85,6 +86,22 @@ model Color {
   @@index([storeId])
 }
 
+model Dosage {
+  id      String @id @default(uuid())
+  storeId String
+  store   Store  @relation("StoreToDosage", fields: [storeId], references: [id])
+
+  name  String // ex: Standard, Pediatric
+  value String // ex: 500 mg, 10 mg/ml
+
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId])
+}
+
 model PharmaceuticalForm {
   id      String @id @default(uuid())
   storeId String
@@ -122,7 +139,9 @@ model Product {
   colorId String
   color   Color  @relation(fields: [colorId], references: [id])
 
-  images Image[]
+  dosageId String
+  dosage   Dosage  @relation(fields: [dosageId], references: [id])
+  images   Image[]
 
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt

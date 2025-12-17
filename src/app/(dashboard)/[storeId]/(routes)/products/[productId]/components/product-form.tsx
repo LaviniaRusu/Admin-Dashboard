@@ -26,6 +26,7 @@ import { Separator } from "@/components/ui/separator";
 import {
   Category,
   Color,
+  Dosage,
   Image,
   PharmaceuticalForm,
   Product,
@@ -52,6 +53,7 @@ interface ProductFormProps {
     | null;
   categories: Category[];
   colors: Color[];
+  dosages: Dosage[];
   sizes: Size[];
   pharmceuticalform: PharmaceuticalForm[];
 }
@@ -61,6 +63,7 @@ const formSchema = z.object({
   price: z.coerce.number().min(1),
   categoryId: z.string().min(1),
   colorId: z.string().min(1),
+  dosageId: z.string().min(1),
   sizeId: z.string().min(1),
   pharmaceuticalFormId: z.string().min(1),
   isFeatured: z.boolean().default(false).optional(),
@@ -71,6 +74,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   initialData,
   categories,
   colors,
+  dosages,
   sizes,
   pharmceuticalform,
 }) => {
@@ -97,6 +101,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           price: 0,
           categoryId: "",
           colorId: "",
+          dosageId: "",
           sizeId: "",
           pharmaceuticalFormId: "",
           isFeatured: false,
@@ -370,6 +375,41 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="dosageId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Dosage</FormLabel>
+                  <Select
+                    disabled={loading}
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          defaultValue={field.value}
+                          placeholder="Select dosage"
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+
+                    <SelectContent>
+                      {dosages.map((dosage) => (
+                        <SelectItem key={dosage.id} value={dosage.id}>
+                          {dosage.name} ({dosage.value})
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name="isFeatured"
