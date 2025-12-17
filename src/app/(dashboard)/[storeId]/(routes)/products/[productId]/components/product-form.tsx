@@ -29,7 +29,6 @@ import {
   Image,
   PharmaceuticalForm,
   Product,
-  Size,
 } from "@/generated/prisma/client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -53,7 +52,7 @@ interface ProductFormProps {
   categories: Category[];
 
   dosages: Dosage[];
-  sizes: Size[];
+
   pharmceuticalform: PharmaceuticalForm[];
 }
 const formSchema = z.object({
@@ -63,7 +62,7 @@ const formSchema = z.object({
   categoryId: z.string().min(1),
 
   dosageId: z.string().min(1),
-  sizeId: z.string().min(1),
+
   pharmaceuticalFormId: z.string().min(1),
   isFeatured: z.boolean().default(false).optional(),
   isArchived: z.boolean().default(false).optional(),
@@ -74,7 +73,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   categories,
 
   dosages,
-  sizes,
+
   pharmceuticalform,
 }) => {
   const params = useParams();
@@ -101,7 +100,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           categoryId: "",
 
           dosageId: "",
-          sizeId: "",
+
           pharmaceuticalFormId: "",
           isFeatured: false,
           isArchived: false,
@@ -271,40 +270,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="sizeId"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Size</FormLabel>
-                  <Select
-                    disabled={loading}
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          defaultValue={field.value}
-                          placeholder="Select a size"
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-
-                    <SelectContent>
-                      {sizes.map((size) => (
-                        <SelectItem key={size.id} value={size.id}>
-                          {size.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="pharmaceuticalFormId"

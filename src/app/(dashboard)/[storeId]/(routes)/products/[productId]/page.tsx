@@ -23,11 +23,6 @@ const ProductPage = async ({
     },
   });
 
-  const sizes = await prisma.size.findMany({
-    where: {
-      storeId: storeId,
-    },
-  });
   const pharmaceuticalForms = await prisma.pharmaceuticalForm.findMany({
     where: {
       storeId: storeId,
@@ -44,7 +39,6 @@ const ProductPage = async ({
     <div>
       <ProductForm
         categories={categories}
-        sizes={sizes}
         dosages={dosages}
         initialData={product}
         pharmceuticalform={pharmaceuticalForms}

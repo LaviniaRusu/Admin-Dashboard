@@ -49,14 +49,10 @@ export function MainNav({
       label: "Categories",
       active: pathname === `/${params.storeId}/categories`,
     },
-    {
-      href: `/${params.storeId}/sizes`,
-      label: "Sizes",
-      active: pathname === `/${params.storeId}/sizes`,
-    },
+
     {
       href: `/${params.storeId}/pharmaceutical-form`,
-      label: "Pharmaceutical-form",
+      label: "Pharmaceutical Form",
       active: pathname === `/${params.storeId}/pharmaceutical-form`,
     },
 
@@ -70,11 +66,7 @@ export function MainNav({
       label: "Products",
       active: pathname === `/${params.storeId}/products`,
     },
-    {
-      href: `/${params.storeId}/descriptions`,
-      label: "Description",
-      active: pathname === `/${params.storeId}/descriptions`,
-    },
+
     {
       href: `/${params.storeId}/orders`,
       label: "Orders",

@@ -21,11 +21,9 @@ model Store {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   categories Category[]  @relation("StoreToCategory")
-  sizes      Size[]      @relation("StoreToSize")
-
-  products Product[] @relation("StoreToProduct")
-  order    Order[]   @relation("StoreToOrder")
-  dosages  Dosage[]  @relation("StoreToDosage")
+  products   Product[]   @relation("StoreToProduct")
+  order      Order[]     @relation("StoreToOrder")
+  dosages    Dosage[]    @relation("StoreToDosage")
 
   storeId String?
 
@@ -58,19 +56,6 @@ model Category {
 
   @@index([storeId])
   @@index([billboardId])
-}
-
-model Size {
-  id        String    @id @default(uuid())
-  storeId   String
-  store     Store     @relation("StoreToSize", fields: [storeId], references: [id])
-  name      String
-  value     String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  products  Product[]
-
-  @@index([storeId])
 }
 
 model Dosage {
@@ -120,9 +105,6 @@ model Product {
   isFeatured Boolean @default(false)
   isArchived Boolean @default(false)
 
-  sizeId String
-  size   Size   @relation(fields: [sizeId], references: [id])
-
   dosageId String
   dosage   Dosage  @relation(fields: [dosageId], references: [id])
   images   Image[]
@@ -135,7 +117,6 @@ model Product {
 
   @@index([storeId])
   @@index([categoryId])
-  @@index([sizeId])
   @@index([dosageId])
   @@index([pharmaceuticalFormId])
 }

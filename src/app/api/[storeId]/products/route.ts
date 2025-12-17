@@ -15,9 +15,7 @@ export async function POST(
       name,
       price,
       categoryId,
-
       dosageId,
-      sizeId,
       pharmaceuticalFormId,
       images,
       isFeatured,
@@ -41,9 +39,7 @@ export async function POST(
     if (!categoryId) {
       return new NextResponse("ICategory Id is requiered", { status: 400 });
     }
-    if (!sizeId) {
-      return new NextResponse("Size Id is requiered", { status: 400 });
-    }
+
     if (!pharmaceuticalFormId) {
       return new NextResponse("  Pharmaceutical Form Id, is requiered", {
         status: 400,
@@ -74,9 +70,7 @@ export async function POST(
         isFeatured,
         isArchived,
         categoryId,
-
         dosageId,
-        sizeId,
         pharmaceuticalFormId,
         storeId: storeId,
 
@@ -103,7 +97,6 @@ export async function GET(
     const categoryId = searchParams.get("categoryId") || undefined;
 
     const dosageId = searchParams.get("dosageId") || undefined;
-    const sizeId = searchParams.get("sizeId") || undefined;
     const pharmaceuticalFormId =
       searchParams.get("pharmaceuticalFormId") || undefined;
     const isFeatured = searchParams.get("isFeatured");
@@ -117,9 +110,7 @@ export async function GET(
       where: {
         storeId: storeId,
         categoryId,
-
         dosageId,
-        sizeId,
         pharmaceuticalFormId,
         isFeatured: isFeatured ? true : undefined,
         isArchived: false,
@@ -127,9 +118,7 @@ export async function GET(
       include: {
         images: true,
         category: true,
-
         dosage: true,
-        size: true,
         pharmaceuticalForm: true,
       },
       orderBy: {

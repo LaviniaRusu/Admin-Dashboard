@@ -19,9 +19,7 @@ export async function GET(
       include: {
         images: true,
         category: true,
-        size: true,
         pharmaceuticalForm: true,
-
         dosage: true,
       },
     });
@@ -49,9 +47,7 @@ export async function PATCH(
       name,
       price,
       categoryId,
-
       dosageId,
-      sizeId,
       pharmaceuticalFormId,
       images,
       isFeatured,
@@ -73,9 +69,6 @@ export async function PATCH(
     }
     if (!categoryId) {
       return new NextResponse("ICategory Id is requiered", { status: 400 });
-    }
-    if (!sizeId) {
-      return new NextResponse("Size Id is requiered", { status: 400 });
     }
     if (!pharmaceuticalFormId) {
       return new NextResponse("Pharmaceutical Form Id is requiered", {
@@ -110,9 +103,7 @@ export async function PATCH(
         name,
         price,
         categoryId,
-
         dosageId,
-        sizeId,
         pharmaceuticalFormId,
         images: {
           deleteMany: {},
