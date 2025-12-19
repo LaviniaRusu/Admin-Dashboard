@@ -31,6 +31,7 @@ const PharmaceuticalFormPage = async ({
   params: Promise<{ pharmaceuticalFormId: string }>;
 }) => {
   const { pharmaceuticalFormId } = await params;
+  console.log("pharmaceuticalFormId from params:", pharmaceuticalFormId);
 
   const form = await prisma.pharmaceuticalForm.findUnique({
     where: {
