@@ -271,7 +271,7 @@ export const PharmaceuticalFormForm: React.FC<PharmaceuticalFormProps> = ({
       if (initialData) {
         await axios.patch(
           `/api/${storeId}/pharmaceutical-form/${pharmaceuticalFormId}`,
-          data
+          data,
         );
       } else {
         await axios.post(`/api/${storeId}/pharmaceutical-form`, data);
@@ -297,7 +297,7 @@ export const PharmaceuticalFormForm: React.FC<PharmaceuticalFormProps> = ({
       };
 
       await axios.delete(
-        `/api/${storeId}/pharmaceutical-form/${pharmaceuticalFormId}`
+        `/api/${storeId}/pharmaceutical-form/${pharmaceuticalFormId}`,
       );
 
       router.refresh();
