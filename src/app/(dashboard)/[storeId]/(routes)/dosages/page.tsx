@@ -19,7 +19,7 @@ const DosagesPage = async ({
     },
   });
 
-  const formattedDosages: DosageColumn[] = dosages.map((item) => ({
+  const formattedDosages: DosageColumn[] = dosages.map((item: any) => ({
     id: item.id,
     name: item.name,
     value: item.value,
