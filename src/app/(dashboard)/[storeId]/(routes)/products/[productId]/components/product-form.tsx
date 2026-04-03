@@ -35,6 +35,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import axios from "axios";
+
 import { Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
@@ -68,12 +69,12 @@ const formSchema = z.object({
   isArchived: z.boolean().default(false).optional(),
 });
 type ProductFormValues = z.infer<typeof formSchema>;
+type ProductFormInput = z.input<typeof formSchema>;
+
 export const ProductForm: React.FC<ProductFormProps> = ({
   initialData,
   categories,
-
   dosages,
-
   pharmceuticalform,
 }) => {
   const params = useParams();
@@ -86,8 +87,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   const toastMessage = initialData ? "Product updated." : "Product created.";
   const action = initialData ? "Edit product" : "Create product";
 
-  const form = useForm<ProductFormValues>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<ProductFormInput>({
+    resolver: zodResolver(formSchema) as any,
     defaultValues: initialData
       ? {
           ...initialData,
@@ -98,15 +99,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           images: [],
           price: 0,
           categoryId: "",
-
           dosageId: "",
-
           pharmaceuticalFormId: "",
           isFeatured: false,
           isArchived: false,
         },
   });
-
   const onSubmit = async (data: ProductFormValues) => {
     try {
       console.log("params:", params);
