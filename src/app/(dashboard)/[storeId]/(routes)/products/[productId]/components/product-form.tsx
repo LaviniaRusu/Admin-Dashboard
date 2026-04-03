@@ -32,7 +32,7 @@ import {
 } from "@/generated/prisma/client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Store } from "@prisma/client";
+
 import { Checkbox } from "@/components/ui/checkbox";
 import axios from "axios";
 import { Trash } from "lucide-react";
