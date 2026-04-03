@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { OrderClient } from "./components/client";
 
 import { formatter } from "@/lib/utils";
+import { OrderColumn } from "./components/columns";
 
 const OrdersPage = async ({
   params,
@@ -25,7 +26,7 @@ const OrdersPage = async ({
       createdAt: "desc",
     },
   });
-  const formattedOrders: OrederColumn[] = orders.map((item) => ({
+  const formattedOrders: OrderColumn[] = orders.map((item: any) => ({
     id: item.id,
     phone: item.phone,
     address: item.address,
