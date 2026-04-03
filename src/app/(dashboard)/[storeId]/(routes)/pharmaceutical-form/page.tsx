@@ -20,7 +20,7 @@ const PharmaceuticalFormPage = async ({
   });
 
   const formattedPharmaceuticalForms: PharmaceuticalFormColumn[] =
-    pharmaceuticalForms.map((item) => ({
+    pharmaceuticalForms.map((item: any) => ({
       id: item.id,
       name: item.name,
       code: item.code,
