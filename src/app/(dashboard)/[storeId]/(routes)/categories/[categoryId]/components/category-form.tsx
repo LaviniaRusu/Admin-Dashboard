@@ -210,7 +210,7 @@ import { Separator } from "@/components/ui/separator";
 import { Billboard, Category } from "@/generated/prisma/client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Store } from "@prisma/client";
+
 import axios from "axios";
 import { Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -278,14 +278,14 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
     try {
       setLoading(true);
       await axios.delete(
-        `/api/${params.storeId}/categories/${params.categoryId}`
+        `/api/${params.storeId}/categories/${params.categoryId}`,
       );
       router.refresh();
       router.push(`/${params.storeId}/categories`);
       toast.success("Category deleted!");
     } catch (error) {
       toast.error(
-        "Make sure you removed all categories using this category first."
+        "Make sure you removed all categories using this category first.",
       );
     } finally {
       setLoading(false);
