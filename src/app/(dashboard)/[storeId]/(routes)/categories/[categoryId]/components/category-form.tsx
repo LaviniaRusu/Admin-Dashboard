@@ -222,7 +222,7 @@ import * as z from "zod";
 
 interface CategoryFormProps {
   initialData: Category | null;
-  billboardId: Billboard[];
+  billboards: Billboard[];
 }
 const formSchema = z.object({
   name: z.string().min(1),
