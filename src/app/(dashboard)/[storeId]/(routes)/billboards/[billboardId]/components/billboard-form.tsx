@@ -204,7 +204,7 @@ import { Separator } from "@/components/ui/separator";
 import { Billboard } from "@/generated/prisma/client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Store } from "@prisma/client";
+
 import axios from "axios";
 import { Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -272,14 +272,14 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
     try {
       setLoading(true);
       await axios.delete(
-        `/api/${params.storeId}/billboards/${params.billboardId}`
+        `/api/${params.storeId}/billboards/${params.billboardId}`,
       );
       router.refresh();
       router.push(`/${params.storeId}/billboards`);
       toast.success("Billboard deleted!");
     } catch (error) {
       toast.error(
-        "Make sure you removed all categories using this billboard first."
+        "Make sure you removed all categories using this billboard first.",
       );
     } finally {
       setLoading(false);
