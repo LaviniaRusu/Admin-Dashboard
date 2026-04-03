@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { format } from "date-fns";
-import { BillboardClient, OrderClient } from "./components/client";
-import { BillboardColumn, OrederColumn } from "./components/columns";
+import { OrderClient } from "./components/client";
+
 import { formatter } from "@/lib/utils";
 
 const OrdersPage = async ({
