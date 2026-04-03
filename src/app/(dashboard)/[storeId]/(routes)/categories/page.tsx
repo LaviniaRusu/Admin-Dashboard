@@ -63,7 +63,7 @@ const CategoriesPage = async ({
       createdAt: "desc",
     },
   });
-  const formattedCategories: CategoryColumn[] = categories.map((item) => ({
+  const formattedCategories: CategoryColumn[] = categories.map((item: any) => ({
     id: item.id,
     name: item.name,
     billboardLabel: item.billboard.label,
