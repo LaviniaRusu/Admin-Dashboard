@@ -10,7 +10,8 @@ export default async function DashboardLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { storeId: string };
+  // params: { storeId: string };
+  params: Promise<{ storeId: string }>;
 }) {
   const user = await currentUser();
 
