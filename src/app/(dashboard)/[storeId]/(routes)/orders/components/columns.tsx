@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 
-export type OrederColumn = {
+export type OrderColumn = {
   id: string;
   phone: string;
   adress: string;
@@ -12,7 +12,7 @@ export type OrederColumn = {
   createdAt: string;
 };
 
-export const columns: ColumnDef<OrederColumn>[] = [
+export const columns: ColumnDef<OrderColumn>[] = [
   {
     accessorKey: "products",
     header: "Products",
